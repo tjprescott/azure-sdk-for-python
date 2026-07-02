@@ -57,7 +57,7 @@ class JsonWebKey(object):
 class KeyAttestation:
     """The key attestation information.
 
-    :ivar certificate_pem_file: The certificate used for attestation validation, in PEM format.
+    :ivar certificate_pem_bytes: The certificate used for attestation validation, in PEM format.
     :vartype certificate_pem_file: bytes or None
     :ivar private_key_attestation: The key attestation corresponding to the private key material of the key.
     :vartype private_key_attestation: bytes or None

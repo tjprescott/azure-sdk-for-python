@@ -74,7 +74,7 @@ namespace azure.keyvault.keys
 
 
     class azure.keyvault.keys.KeyAttestation:
-        certificate_pem_file: Union[bytes, None]
+        certificate_pem_bytes
         private_key_attestation: Union[bytes, None]
         public_key_attestation: Union[bytes, None]
         version: Union[str, None]
