@@ -215,16 +215,16 @@ class KeyProperties(object):
         return self._attributes.enabled if self._attributes else None
 
     @property
-    def not_before(self) -> Optional[datetime]:
+    def not_before_date(self) -> Optional[datetime]:
         """The time before which the key can not be used, in UTC.
 
         :returns: The time before which the key can not be used, in UTC.
         :rtype: ~datetime.datetime or None
         """
-        return self._attributes.not_before if self._attributes else None
+        return self._attributes.not_before_date if self._attributes else None
 
     @property
-    def expires_on(self) -> Optional[datetime]:
+    def expires_on_date(self) -> Optional[datetime]:
         """When the key will expire, in UTC.
 
         :returns: When the key will expire, in UTC.
@@ -233,7 +233,7 @@ class KeyProperties(object):
         return self._attributes.expires if self._attributes else None
 
     @property
-    def created_on(self) -> Optional[datetime]:
+    def created_on_date(self) -> Optional[datetime]:
         """When the key was created, in UTC.
 
         :returns: When the key was created, in UTC.
@@ -453,8 +453,8 @@ class KeyRotationPolicy(object):
         duration. For example, 90 days is "P90D".  See `Wikipedia <https://wikipedia.org/wiki/ISO_8601#Durations>`_ for
         more information on ISO 8601 durations.
     :vartype expires_in: str or None
-    :ivar created_on: When the policy was created, in UTC
-    :vartype created_on: ~datetime.datetime or None
+    :ivar created_on_date: When the policy was created, in UTC
+    :vartype created_on_date: ~datetime.datetime or None
     :ivar updated_on: When the policy was last updated, in UTC
     :vartype updated_on: ~datetime.datetime or None
     """
@@ -463,7 +463,7 @@ class KeyRotationPolicy(object):
         self.id = kwargs.get("policy_id", None)
         self.lifetime_actions: List[KeyRotationLifetimeAction] = kwargs.get("lifetime_actions", [])
         self.expires_in = kwargs.get("expires_in", None)
-        self.created_on = kwargs.get("created_on", None)
+        self.created_on_date = kwargs.get("created_on_date", None)
         self.updated_on = kwargs.get("updated_on", None)
 
     @classmethod
@@ -481,7 +481,7 @@ class KeyRotationPolicy(object):
                 policy_id=policy.id,
                 lifetime_actions=lifetime_actions,
                 expires_in=policy.attributes.expiry_time,
-                created_on=policy.attributes.created,
+                created_on_date=policy.attributes.created,
                 updated_on=policy.attributes.updated,
             )
         return cls(policy_id=policy.id, lifetime_actions=lifetime_actions)
