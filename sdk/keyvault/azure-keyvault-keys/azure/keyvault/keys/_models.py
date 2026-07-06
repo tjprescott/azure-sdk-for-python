@@ -242,7 +242,7 @@ class KeyProperties(object):
         return self._attributes.created if self._attributes else None
 
     @property
-    def updated_on(self) -> Optional[datetime]:
+    def updated_on_date(self) -> Optional[datetime]:
         """When the key was last updated, in UTC.
 
         :returns: When the key was last updated, in UTC.
@@ -455,8 +455,8 @@ class KeyRotationPolicy(object):
     :vartype expires_in: str or None
     :ivar created_on_date: When the policy was created, in UTC
     :vartype created_on_date: ~datetime.datetime or None
-    :ivar updated_on: When the policy was last updated, in UTC
-    :vartype updated_on: ~datetime.datetime or None
+    :ivar updated_on_date: When the policy was last updated, in UTC
+    :vartype updated_on_date: ~datetime.datetime or None
     """
 
     def __init__(self, **kwargs: Any) -> None:
@@ -464,7 +464,7 @@ class KeyRotationPolicy(object):
         self.lifetime_actions: List[KeyRotationLifetimeAction] = kwargs.get("lifetime_actions", [])
         self.expires_in = kwargs.get("expires_in", None)
         self.created_on_date = kwargs.get("created_on_date", None)
-        self.updated_on = kwargs.get("updated_on", None)
+        self.updated_on_date = kwargs.get("updated_on_date", None)
 
     @classmethod
     def _from_generated(cls, policy: "_models.KeyRotationPolicy") -> "KeyRotationPolicy":
@@ -482,7 +482,7 @@ class KeyRotationPolicy(object):
                 lifetime_actions=lifetime_actions,
                 expires_in=policy.attributes.expiry_time,
                 created_on_date=policy.attributes.created,
-                updated_on=policy.attributes.updated,
+                updated_on_date=policy.attributes.updated,
             )
         return cls(policy_id=policy.id, lifetime_actions=lifetime_actions)
 
