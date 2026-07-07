@@ -398,7 +398,7 @@ namespace azure.keyvault.keys
         property recovery_level: Optional[str]    # Read-only
         property release_policy: Optional[KeyReleasePolicy]    # Read-only
         property tags: Optional[Dict[str, str]]    # Read-only
-        property updated_on: Optional[datetime]    # Read-only
+        property updated_on_date: Optional[datetime]    # Read-only
         property vault_url: str    # Read-only
         property version: Optional[str]    # Read-only
 
@@ -445,7 +445,7 @@ namespace azure.keyvault.keys
         expires_in: Union[str, None]
         id: Union[str, None]
         lifetime_actions: list[KeyRotationLifetimeAction]
-        updated_on: Union[datetime, None]
+        updated_on_date: Union[datetime, None]
 
         def __init__(self, **kwargs: Any) -> None: ...
 
