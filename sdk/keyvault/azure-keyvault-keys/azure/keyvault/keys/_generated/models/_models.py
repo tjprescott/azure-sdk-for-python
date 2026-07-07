@@ -357,8 +357,8 @@ class KeyAttestation(_Model):
     :ivar public_key_attestation: The attestation blob bytes encoded as base64url string
      corresponding to a public key in case of asymmetric key.
     :vartype public_key_attestation: bytes
-    :ivar version: The version of the attestation.
-    :vartype version: str
+    :ivar attestation_version: The version of the attestation.
+    :vartype attestation_version: str
     """
 
     certificate_pem_file: Optional[bytes] = rest_field(
@@ -375,7 +375,7 @@ class KeyAttestation(_Model):
     )
     """The attestation blob bytes encoded as base64url string corresponding to a public key in case of
      asymmetric key."""
-    version: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    attestation_version: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The version of the attestation."""
 
     @overload
@@ -385,7 +385,7 @@ class KeyAttestation(_Model):
         certificate_pem_file: Optional[bytes] = None,
         private_key_attestation: Optional[bytes] = None,
         public_key_attestation: Optional[bytes] = None,
-        version: Optional[str] = None,
+        attestation_version: Optional[str] = None,
     ) -> None: ...
 
     @overload

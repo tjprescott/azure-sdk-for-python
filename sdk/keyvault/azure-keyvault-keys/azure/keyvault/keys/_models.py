@@ -63,8 +63,8 @@ class KeyAttestation:
     :vartype private_key_attestation: bytes or None
     :ivar public_key_attestation: The key attestation corresponding to the public key material of the key.
     :vartype public_key_attestation: bytes or None
-    :ivar version: The version of the attestation.
-    :vartype version: str or None
+    :ivar attestation_version: The version of the attestation.
+    :vartype attestation_version: str or None
     """
 
     def __init__(
@@ -73,15 +73,15 @@ class KeyAttestation:
         certificate_pem_file: Optional[bytes] = None,
         private_key_attestation: Optional[bytes] = None,
         public_key_attestation: Optional[bytes] = None,
-        version: Optional[str] = None,
+        attestation_version: Optional[str] = None,
     ) -> None:
         self.certificate_pem_file = certificate_pem_file
         self.private_key_attestation = private_key_attestation
         self.public_key_attestation = public_key_attestation
-        self.version = version
+        self.attestation_version = attestation_version
 
     def __repr__(self) -> str:
-        return f"<KeyAttestation [{self.version}]>"[:1024]
+        return f"<KeyAttestation [{self.attestation_version}]>"[:1024]
 
     @classmethod
     def _from_generated(cls, attestation: "_models.KeyAttestation") -> "KeyAttestation":
@@ -89,7 +89,7 @@ class KeyAttestation:
             certificate_pem_file=attestation.certificate_pem_file,
             private_key_attestation=attestation.private_key_attestation,
             public_key_attestation=attestation.public_key_attestation,
-            version=attestation.version,
+            attestation_version=attestation.attestation_version,
         )
 
 
