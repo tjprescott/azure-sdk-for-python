@@ -74,18 +74,18 @@ namespace azure.keyvault.keys
 
 
     class azure.keyvault.keys.KeyAttestation:
+        attestation_version: Union[str, None]
         certificate_pem_bytes
         private_key_attestation: Union[bytes, None]
         public_key_attestation: Union[bytes, None]
-        version: Union[str, None]
 
         def __init__(
                 self, 
                 *, 
+                attestation_version: Optional[str] = ..., 
                 certificate_pem_file: Optional[bytes] = ..., 
                 private_key_attestation: Optional[bytes] = ..., 
-                public_key_attestation: Optional[bytes] = ..., 
-                version: Optional[str] = ...
+                public_key_attestation: Optional[bytes] = ...
             ) -> None: ...
 
         def __repr__(self) -> str: ...
