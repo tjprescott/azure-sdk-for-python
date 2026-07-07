@@ -383,9 +383,9 @@ namespace azure.keyvault.keys
 
     class azure.keyvault.keys.KeyProperties:
         property attestation: Optional[KeyAttestation]    # Read-only
-        property created_on_date: Optional[datetime]    # Read-only
+        property created_on: Optional[datetime]    # Read-only
         property enabled: Optional[bool]    # Read-only
-        property expires_on_date: Optional[datetime]    # Read-only
+        property expires_on: Optional[datetime]    # Read-only
         property exportable: Optional[bool]    # Read-only
         property external_key: Optional[ExternalKey]    # Read-only
         property hsm_platform: Optional[str]    # Read-only
@@ -393,12 +393,12 @@ namespace azure.keyvault.keys
         property key_size: Optional[int]    # Read-only
         property managed: Optional[bool]    # Read-only
         property name: str    # Read-only
-        property not_before_date: Optional[datetime]    # Read-only
+        property not_before: Optional[datetime]    # Read-only
         property recoverable_days: Optional[int]    # Read-only
         property recovery_level: Optional[str]    # Read-only
         property release_policy: Optional[KeyReleasePolicy]    # Read-only
         property tags: Optional[Dict[str, str]]    # Read-only
-        property updated_on_date: Optional[datetime]    # Read-only
+        property updated_on: Optional[datetime]    # Read-only
         property vault_url: str    # Read-only
         property version: Optional[str]    # Read-only
 
@@ -441,11 +441,11 @@ namespace azure.keyvault.keys
 
 
     class azure.keyvault.keys.KeyRotationPolicy:
-        created_on_date: Union[datetime, None]
+        created_on: Union[datetime, None]
         expires_in: Union[str, None]
         id: Union[str, None]
         lifetime_actions: list[KeyRotationLifetimeAction]
-        updated_on_date: Union[datetime, None]
+        updated_on: Union[datetime, None]
 
         def __init__(self, **kwargs: Any) -> None: ...
 
