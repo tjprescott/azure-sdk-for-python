@@ -75,16 +75,16 @@ namespace azure.keyvault.keys
 
     class azure.keyvault.keys.KeyAttestation:
         certificate_pem_bytes: Union[bytes, None]
-        private_key_attest: Union[bytes, None]
-        public_key_attest: Union[bytes, None]
+        private_key_attestation: Union[bytes, None]
+        public_key_attestation: Union[bytes, None]
         version: Union[str, None]
 
         def __init__(
                 self, 
                 *, 
                 certificate_pem_bytes: Optional[bytes] = ..., 
-                private_key_attest: Optional[bytes] = ..., 
-                public_key_attest: Optional[bytes] = ..., 
+                private_key_attestation: Optional[bytes] = ..., 
+                public_key_attestation: Optional[bytes] = ..., 
                 version: Optional[str] = ...
             ) -> None: ...
 
