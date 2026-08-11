@@ -57,12 +57,12 @@ class JsonWebKey(object):
 class KeyAttestation:
     """The key attestation information.
 
-    :ivar certificate_pem_file: The certificate used for attestation validation, in PEM format.
-    :vartype certificate_pem_file: bytes or None
-    :ivar private_key_attestation: The key attestation corresponding to the private key material of the key.
-    :vartype private_key_attestation: bytes or None
-    :ivar public_key_attestation: The key attestation corresponding to the public key material of the key.
-    :vartype public_key_attestation: bytes or None
+    :ivar certificate_pem_bytes: The certificate used for attestation validation, in PEM format.
+    :vartype certificate_pem_bytes: bytes or None
+    :ivar private_key_attest: The key attestation corresponding to the private key material of the key.
+    :vartype private_key_attest: bytes or None
+    :ivar public_key_attest: The key attestation corresponding to the public key material of the key.
+    :vartype public_key_attest: bytes or None
     :ivar version: The version of the attestation.
     :vartype version: str or None
     """
@@ -70,14 +70,14 @@ class KeyAttestation:
     def __init__(
         self,
         *,
-        certificate_pem_file: Optional[bytes] = None,
-        private_key_attestation: Optional[bytes] = None,
-        public_key_attestation: Optional[bytes] = None,
+        certificate_pem_bytes: Optional[bytes] = None,
+        private_key_attest: Optional[bytes] = None,
+        public_key_attest: Optional[bytes] = None,
         version: Optional[str] = None,
     ) -> None:
-        self.certificate_pem_file = certificate_pem_file
-        self.private_key_attestation = private_key_attestation
-        self.public_key_attestation = public_key_attestation
+        self.certificate_pem_bytes = certificate_pem_bytes
+        self.private_key_attest = private_key_attest
+        self.public_key_attest = public_key_attest
         self.version = version
 
     def __repr__(self) -> str:
@@ -86,9 +86,9 @@ class KeyAttestation:
     @classmethod
     def _from_generated(cls, attestation: "_models.KeyAttestation") -> "KeyAttestation":
         return cls(
-            certificate_pem_file=attestation.certificate_pem_file,
-            private_key_attestation=attestation.private_key_attestation,
-            public_key_attestation=attestation.public_key_attestation,
+            certificate_pem_bytes=attestation.certificate_pem_bytes,
+            private_key_attest=attestation.private_key_attest,
+            public_key_attest=attestation.public_key_attest,
             version=attestation.version,
         )
 
