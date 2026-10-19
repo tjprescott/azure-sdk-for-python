@@ -3,8 +3,6 @@ namespace azure.keyvault.keys
 
     class azure.keyvault.keys.ApiVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
         V2016_10_01 = "2016-10-01"
-        V2025_07_01 = "2025-07-01"
-        V2026_01_01_PREVIEW = "2026-01-01-preview"
         V7_0 = "7.0"
         V7_1 = "7.1"
         V7_2 = "7.2"
@@ -37,17 +35,6 @@ namespace azure.keyvault.keys
         def __repr__(self) -> str: ...
 
 
-    class azure.keyvault.keys.ExternalKey:
-
-        def __init__(
-                self, 
-                *, 
-                id: str
-            ) -> None: ...
-
-        def __repr__(self) -> str: ...
-
-
     class azure.keyvault.keys.JsonWebKey:
 
         def __init__(
@@ -74,7 +61,7 @@ namespace azure.keyvault.keys
 
 
     class azure.keyvault.keys.KeyAttestation:
-        certificate_pem_bytes
+        certificate_pem_file: Union[bytes, None]
         private_key_attestation: Union[bytes, None]
         public_key_attestation: Union[bytes, None]
         version: Union[str, None]
@@ -138,20 +125,6 @@ namespace azure.keyvault.keys
                 exportable: Optional[bool] = ..., 
                 hardware_protected: Optional[bool] = False, 
                 key_operations: Optional[List[Union[str, KeyOperation]]] = ..., 
-                not_before: Optional[datetime] = ..., 
-                release_policy: Optional[KeyReleasePolicy] = ..., 
-                tags: Optional[Dict[str, str]] = ..., 
-                **kwargs: Any
-            ) -> KeyVaultKey: ...
-
-        @distributed_trace
-        def create_external_key(
-                self, 
-                name: str, 
-                external_key: ExternalKey, 
-                *, 
-                enabled: Optional[bool] = ..., 
-                expires_on: Optional[datetime] = ..., 
                 not_before: Optional[datetime] = ..., 
                 release_policy: Optional[KeyReleasePolicy] = ..., 
                 tags: Optional[Dict[str, str]] = ..., 
@@ -373,8 +346,6 @@ namespace azure.keyvault.keys
         encrypt = "encrypt"
         export = "export"
         import_key = "import"
-        secure_unwrap_key = "secureUnwrapKey"
-        secure_wrap_key = "secureWrapKey"
         sign = "sign"
         unwrap_key = "unwrapKey"
         verify = "verify"
@@ -387,17 +358,15 @@ namespace azure.keyvault.keys
         property enabled: Optional[bool]    # Read-only
         property expires_on: Optional[datetime]    # Read-only
         property exportable: Optional[bool]    # Read-only
-        property external_key: Optional[ExternalKey]    # Read-only
         property hsm_platform: Optional[str]    # Read-only
         property id: str    # Read-only
-        property key_size: Optional[int]    # Read-only
         property managed: Optional[bool]    # Read-only
         property name: str    # Read-only
         property not_before: Optional[datetime]    # Read-only
         property recoverable_days: Optional[int]    # Read-only
         property recovery_level: Optional[str]    # Read-only
         property release_policy: Optional[KeyReleasePolicy]    # Read-only
-        property tags: Optional[Dict[str, str]]    # Read-only
+        property tags: Dict[str, str]    # Read-only
         property updated_on: Optional[datetime]    # Read-only
         property vault_url: str    # Read-only
         property version: Optional[str]    # Read-only
@@ -532,20 +501,6 @@ namespace azure.keyvault.keys.aio
                 exportable: Optional[bool] = ..., 
                 hardware_protected: Optional[bool] = False, 
                 key_operations: Optional[List[Union[str, KeyOperation]]] = ..., 
-                not_before: Optional[datetime] = ..., 
-                release_policy: Optional[KeyReleasePolicy] = ..., 
-                tags: Optional[Dict[str, str]] = ..., 
-                **kwargs: Any
-            ) -> KeyVaultKey: ...
-
-        @distributed_trace_async
-        async def create_external_key(
-                self, 
-                name: str, 
-                external_key: ExternalKey, 
-                *, 
-                enabled: Optional[bool] = ..., 
-                expires_on: Optional[datetime] = ..., 
                 not_before: Optional[datetime] = ..., 
                 release_policy: Optional[KeyReleasePolicy] = ..., 
                 tags: Optional[Dict[str, str]] = ..., 
@@ -814,22 +769,6 @@ namespace azure.keyvault.keys.crypto
             ) -> EncryptResult: ...
 
         @distributed_trace
-        def secure_unwrap_key(
-                self, 
-                algorithm: KeySecureWrapAlgorithm, 
-                encrypted_key: bytes, 
-                target_attestation_token: str, 
-                **kwargs: Any
-            ) -> SecureUnwrapResult: ...
-
-        @distributed_trace
-        def secure_wrap_key(
-                self, 
-                algorithm: KeySecureWrapAlgorithm, 
-                **kwargs: Any
-            ) -> SecureWrapResult: ...
-
-        @distributed_trace
         def send_request(
                 self, 
                 request: HttpRequest, 
@@ -912,24 +851,10 @@ namespace azure.keyvault.keys.crypto
         rsa_oaep_256 = "RSA-OAEP-256"
 
 
-    class azure.keyvault.keys.crypto.KeySecureWrapAlgorithm(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-        aes_128 = "A128KW"
-        aes_128_pad = "A128KWPAD"
-        aes_192 = "A192KW"
-        aes_192_pad = "A192KWPAD"
-        aes_256 = "A256KW"
-        aes_256_pad = "A256KWPAD"
-        ckm_aes_key_wrap = "CKM_AES_KEY_WRAP"
-        ckm_aes_key_wrap_pad = "CKM_AES_KEY_WRAP_PAD"
-        rsa_oaep_256 = "RSA-OAEP-256"
-
-
     class azure.keyvault.keys.crypto.KeyVaultRSAPrivateKey(RSAPrivateKey):
         property key_size: int    # Read-only
 
         def __copy__(self) -> KeyVaultRSAPrivateKey: ...
-
-        def __deepcopy__(self, memo: dict) -> KeyVaultRSAPrivateKey: ...
 
         def __init__(
                 self, 
@@ -972,8 +897,6 @@ namespace azure.keyvault.keys.crypto
         property key_size: int    # Read-only
 
         def __copy__(self) -> KeyVaultRSAPublicKey: ...
-
-        def __deepcopy__(self, memo: dict) -> KeyVaultRSAPublicKey: ...
 
         def __eq__(self, other: object) -> bool: ...
 
@@ -1029,26 +952,6 @@ namespace azure.keyvault.keys.crypto
         rsa1_5 = "RSA1_5"
         rsa_oaep = "RSA-OAEP"
         rsa_oaep_256 = "RSA-OAEP-256"
-
-
-    class azure.keyvault.keys.crypto.SecureUnwrapResult:
-
-        def __init__(
-                self, 
-                key_id: Optional[str], 
-                algorithm: KeySecureWrapAlgorithm, 
-                key: bytes
-            ) -> None: ...
-
-
-    class azure.keyvault.keys.crypto.SecureWrapResult:
-
-        def __init__(
-                self, 
-                key_id: Optional[str], 
-                algorithm: KeySecureWrapAlgorithm, 
-                encrypted_key: bytes
-            ) -> None: ...
 
 
     class azure.keyvault.keys.crypto.SignResult:
@@ -1150,22 +1053,6 @@ namespace azure.keyvault.keys.crypto.aio
                 iv: Optional[bytes] = ..., 
                 **kwargs: Any
             ) -> EncryptResult: ...
-
-        @distributed_trace_async
-        async def secure_unwrap_key(
-                self, 
-                algorithm: KeySecureWrapAlgorithm, 
-                encrypted_key: bytes, 
-                target_attestation_token: str, 
-                **kwargs: Any
-            ) -> SecureUnwrapResult: ...
-
-        @distributed_trace_async
-        async def secure_wrap_key(
-                self, 
-                algorithm: KeySecureWrapAlgorithm, 
-                **kwargs: Any
-            ) -> SecureWrapResult: ...
 
         @distributed_trace_async
         def send_request(
