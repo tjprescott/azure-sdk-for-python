@@ -1,3 +1,5 @@
-apiMdSha256: 607621e4437753200b71dcdcddaddcabeaf41944273a4600713b004471117189
-parserVersion: 0.3.28
-pythonVersion: 3.13.14
+apiHash: 1c301b454f9c85283b332bbbb8e5f9012a14dff7b3dafc0dfb591c905f530acb
+packageRelativePath: sdk/keyvault/azure-keyvault-keys
+packageVersion: 4.12.0
+parserVersion: 0.3.31
+pythonVersion: 3.12.15
